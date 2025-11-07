@@ -19,17 +19,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(int id, User user) {
-        return repo.findById(id)
-                .map(existingUser -> {
-                    existingUser.setUsername(user.getUsername());
-                    existingUser.setEmail(user.getEmail());
-                    existingUser.setPassword(user.getPassword());
-                    existingUser.setRole(user.getRole());
-                    existingUser.setDepartment(user.getDepartment());
-                    existingUser.setStatus(user.getStatus());
-                    return repo.save(existingUser);
-                })
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        return repo.findById(id).map(existingUser -> {
+            existingUser.setUsername(user.getUsername());
+            // Update email only if it’s different
+            if (!existingUser.getEmail().equals(user.getEmail())) {
+                existingUser.setEmail(user.getEmail());
+            }
+            existingUser.setPassword(user.getPassword());
+            existingUser.setRole(user.getRole());
+            existingUser.setDepartment(user.getDepartment());
+            existingUser.setStatus(user.getStatus());
+            return repo.save(existingUser);
+        }).orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
     @Override

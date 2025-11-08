@@ -27,13 +27,13 @@ public class User {
     private String password;
 
     @Column
-    private String role; // Student / Admin / Placement / College
+    private String role; 
 
     @Column
     private String department;
 
     @Column
-    private String status; // Active / Inactive
+    private String status; 
 
     public User() {}
 
@@ -47,8 +47,7 @@ public class User {
         this.status = status;
     }
 
-    // getters & setters...
-    // (omitted here for brevity in snippet — include all getters/setters in file)
+    
     public int getUserId() { return userId; }
     public void setUserId(int userId) { this.userId = userId; }
     public String getUsername() { return username; }

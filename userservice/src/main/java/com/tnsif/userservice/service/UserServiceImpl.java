@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
     public User updateUser(int id, User user) {
         return repo.findById(id).map(existingUser -> {
             existingUser.setUsername(user.getUsername());
-            // Update email only if it’s different
             if (!existingUser.getEmail().equals(user.getEmail())) {
                 existingUser.setEmail(user.getEmail());
             }
